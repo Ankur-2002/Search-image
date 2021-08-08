@@ -5,6 +5,11 @@
   outline: none;
   border-radius: 10px;
 }
+@media (max-width : 400px) {
+  .Navbar input{
+    width: 100%;
+  }
+}
 .Navbar{
   padding: 10px 10px;
   font-size: 25px;
