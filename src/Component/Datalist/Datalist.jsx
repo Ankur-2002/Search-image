@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {useSelector} from 'react-redux'
 import Classes from './Datalist.module.css'
 const Datalist = () => {
 
     const store = useSelector(state => state.localstorage);
-    console.log(store)
+    // console.log(store)
     return (
         <>
             { 
