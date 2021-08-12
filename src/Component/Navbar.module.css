@@ -1,16 +1,16 @@
-.Navbar input{
-  width: 40%;   
+.Navbar input {
+  width: 40%;
   text-align: center;
   border: none;
   outline: none;
   border-radius: 10px;
 }
-@media (max-width : 400px) {
-  .Navbar input{
+@media (max-width: 400px) {
+  .Navbar input {
     width: 100%;
   }
 }
-.Navbar{
+.Navbar {
   padding: 10px 10px;
   font-size: 25px;
   margin: 0;
