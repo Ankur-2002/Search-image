@@ -11,7 +11,8 @@ let page = 1;
 const ResultView = () => {
   const Dispatch = useDispatch();
   const store = useSelector(state => state);
-  console.log('ankur');
+  const name = store.name;
+  // console.log('ankur');
   const [containerRef, isView] = useObserver({
     threshold: 0.5,
     root: null,
@@ -19,32 +20,35 @@ const ResultView = () => {
   });
 
   useEffect(() => {
-    const time = setTimeout(() => {
-      const Images = async (pageNumber = page) => {
-        try {
-          const res = await fetch(
-            `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=7c6cc793912ee9fe86fa700694679fa8&tags=${
-              store.name === '' ? 'nature' : store.name
-            }&format=json&nojsoncallback=1&page=${pageNumber}&per_page=20`
-          );
-          const result = await res.json();
-          Dispatch(
-            ImageSliceAction.AddMore({
-              images: result.photos.photo,
-            })
-          );
-        } catch (error) {}
-      };
-
-      Images();
-      page = page + 1;
-    }, 700);
+    const time = setTimeout(async () => {
+      try {
+        const res = await fetch(
+          `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=7c6cc793912ee9fe86fa700694679fa8&tags=${
+            name === '' ? 'nature' : name
+          }&format=json&nojsoncallback=1&page=${++page}&per_page=30`
+        );
+        const result = await res.json();
+        console.log(result);
+        if (result.photos.photo.length === 0) return;
+        Dispatch(
+          ImageSliceAction.AddMore({
+            images: result.photos.photo,
+          })
+        );
+      } catch (error) {}
+    }, 500);
     return () => {
       clearTimeout(time);
     };
   }, [isView, store.name]);
+  useEffect(() => {
+    page = 0;
+    first = false;
+    console.log('A');
+  }, [name]);
   if (isView) {
     first = true;
+  } else {
   }
   return (
     <Container>
@@ -61,13 +65,11 @@ const ResultView = () => {
           <p className={Classes.Empty}>No Search Found</p>
         )}
         {
-          <div ref={containerRef} style={{ position: 'relative' }}>
-            {first && store.item.length > 20 && !store.Loading && (
-              <p className="loader">
-                {' '}
-                {isView ? 'Loading ... ' : 'No More Item'}{' '}
-              </p>
-            )}
+          <div
+            ref={containerRef}
+            style={{ position: 'relative', width: '100%', height: '10px' }}
+          >
+            {/* <p>Loading...</p> */}
           </div>
         }
       </div>

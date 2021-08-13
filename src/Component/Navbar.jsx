@@ -24,13 +24,12 @@ const Navbar = () => {
     const time = setTimeout(async () => {
       Dispatch(ImageSliceAction.Loading());
       Dispatch(
-        ImageSliceAction.AddImage({
-          images: [],
+        ImageSliceAction.Start({
           name: search === 'nature' ? null : search,
         })
       );
       Dispatch(ImageSliceAction.NotLoading());
-    }, 500);
+    }, 700);
 
     return () => {
       clearTimeout(time); // callback for clear timeinterval and minimize call stack
@@ -38,20 +37,18 @@ const Navbar = () => {
   }, [search]);
 
   return (
-    <React.Fragment>
-      <Container className={`${Classes.Navbar}`}>
-        <h1>Search Photos</h1>
-        <input
-          type="text"
-          onChange={fetchImage}
-          list={'Search'}
-          placeholder={'Search'}
-        ></input>
-        <datalist id={'Search'}>
-          <Datalist />
-        </datalist>
-      </Container>
-    </React.Fragment>
+    <Container className={`${Classes.Navbar}`}>
+      <h1>Search Photos</h1>
+      <input
+        type="text"
+        onChange={fetchImage}
+        list={'Search'}
+        placeholder={'Search'}
+      ></input>
+      <datalist id={'Search'}>
+        <Datalist />
+      </datalist>
+    </Container>
   );
 };
 

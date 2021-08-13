@@ -13,8 +13,8 @@ const ImageSlice = createSlice({
   name: 'image',
   initialState: initialState,
   reducers: {
-    AddImage(state, action) {
-      state.item = [...action.payload.images];
+    Start(state, action) {
+      state.item = [];
       const exist = state.localstorage.find(
         item => item === action.payload.name
       );
