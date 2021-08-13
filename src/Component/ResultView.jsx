@@ -44,7 +44,7 @@ const ResultView = () => {
   useEffect(() => {
     page = 0;
     first = false;
-    console.log('A');
+    // console.log('A');
   }, [name]);
   if (isView) {
     first = true;
